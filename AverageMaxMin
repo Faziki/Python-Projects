@@ -1,0 +1,28 @@
+import re
+f=open("input.txt", "r")
+onef= open("output.txt","w+")
+
+if f.mode == 'r':
+    for line in f.readlines():
+        line_digits = []
+        for i in line:
+            if i.isdigit():
+                line_digits.append(int(i))
+        if 'min' in line:
+            onef.write('The min of [1,2,3,4,5,6] is %s \n' % min(line_digits))
+        elif 'max' in line:
+            onef.write('The max of [1,2,3,4,5,6] is %s \n' % max(line_digits))
+        elif 'avg' in line:
+            c = len(line_digits) 
+            s = sum(line_digits) 
+            avg = float(s) / c
+            
+            onef.write('The average of [1,2,3,4,5,6] is %s \n' % avg)
+        else:
+            print(error)
+
+print('Printed to output.txt')
+
+onef.close()
+f.close()
+

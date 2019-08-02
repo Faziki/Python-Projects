@@ -1,0 +1,75 @@
+import re
+
+prot_match = {'TGA': '*', 'GCG': 'A', 'CGA': 'R', 'ATA': 'I', 'AGA':
+'R', 'TAA': '*', 'TTT': 'F', 'GAG': 'E', 'CTT': 'L', 'CGT': 'R', 'CTC':
+'L', 'CTG': 'L', 'TGT': 'C', 'CCA': 'P', 'AAT': 'N', 'GTC': 'V', 'GAC':
+'D', 'GAT': 'D', 'TAT': 'Y', 'AAA': 'K', 'GTA': 'V', 'TAG': '*', 'CGC':
+'R', 'GCA': 'A', 'TCG': 'S', 'GCT': 'A', 'GCC': 'A', 'TGG': 'W', 'TTC':
+'F', 'CCC': 'P', 'TTG': 'L', 'CGG': 'R', 'GGC': 'G', 'AGG': 'R', 'TCC':
+'S', 'CCT': 'P', 'GGT': 'G', 'GGG': 'G', 'TCA': 'S', 'AGC': 'S', 'CAG':
+'Q', 'CAC': 'H', 'ATC': 'I', 'GAA': 'E', 'GTG': 'V', 'CCG': 'P', 'CAT':
+'H', 'AAG': 'K', 'ATG': 'M', 'AAC': 'N', 'TAC': 'Y', 'TGC': 'C', 'CTA':
+'L', 'TCT': 'S', 'ATT': 'I', 'ACG': 'T', 'AGT': 'S', 'GTT': 'V', 'TTA':
+'L', 'CAA': 'Q', 'GGA': 'G', 'ACC': 'T', 'ACA': 'T', 'ACT': 'T'}
+
+
+def translate (arr, size = 1, frame = 1):
+    return [arr[i: i+size] for i in range(frame - 1, len(arr), size)]
+dna = input('Enter DNA: ').upper()
+
+frames = 1
+for frame in range(frames):
+    chunked_dna = translate(dna, 3, frame + 1)
+    prot_seq = map(lambda seq: prot_match.get(seq, '0'), chunked_dna )
+
+    prot_seq = ''.join(prot_seq)
+    print('Protein sequence' ':', prot_seq)
+
+
+def mutate():
+    f = open("DNA.txt", "r")
+    onef = open("normalDNA.txt","w+")
+    twof = open("mutatedDNA.txt","w+")
+
+    if f.mode == 'r':
+        for line in f.readlines():
+            if 'a' in line:
+                onef.write(line.replace('a', 'A'))
+                twof.write(line.replace('a', 'T'))
+            else:
+                onef.write(line)
+                twof.write(line)
+       
+    f.close()
+
+            
+def txtTranslate():
+    onef = open("normalDNA.txt","r")
+    twof = open("mutatedDNA.txt","r")
+    for f in [onef, twof]:
+        if f.mode == 'r':
+            dna = f.read().replace('\n', '')
+            
+            frames = 1
+            for frame in range(frames):
+                chunked_dna = translate(dna, 3, frame + 1)
+                prot_seq = map(lambda seq: prot_match.get(seq, '0'), chunked_dna )
+
+                prot_seq = ''.join(prot_seq)
+                print('Protein sequence' ':', prot_seq)
+            
+
+
+
+
+
+            
+
+mutate()
+txtTranslate()
+
+
+
+
+    
+

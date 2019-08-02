@@ -1,0 +1,69 @@
+
+# Determine price
+def base_cost(choices):
+    if int(choices['delivery_method']) == 1:
+        # Air = 0.36 per km
+        base_cost = float(choices['parcel_distance']) * 0.36
+        base_cost = base_cost + float(choices['parcel_price'])
+    elif int(choices['delivery_method']) == 2:
+        # Freight = 0.25 per km
+        base_cost = float(choices['parcel_distance']) * 0.25
+        base_cost = base_cost + float(choices['parcel_price'])
+    return base_cost
+
+def insurance_cost(choices):
+    if int(choices['insurance']) == 1:
+        return 50
+    elif int(choices['insurance']) == 2:
+        return 25
+
+def gift_cost(choices):
+    if int(choices['gift']) == 1:
+        return 15
+    elif int(choices['gift']) == 2:
+        return 0
+
+def priority_cost(choices):
+    if int(choices['priority']) == 1:
+        return 100
+    elif int(choices['priority']) == 2:
+        return 20
+
+
+def parcel_delivery_cost(choices):
+    # base cost = distance per km + parcel cost
+    pdc = base_cost(choices)
+    # insurance cost
+    pdc = pdc + insurance_cost(choices)
+    # gift
+    pdc = pdc + gift_cost(choices)
+    # priority
+    pdc = pdc + priority_cost(choices)
+
+    return pdc
+
+
+# User input
+user_choices = {}
+# user_choices = {
+#   'parcel_price': 
+# Get parcel price
+print('Hello to the courier company!\n')
+user_choices['parcel_price'] = input('Enter package price: R\n')
+# Get parcel travel distance
+user_choices['parcel_distance'] = input('Enter distance of delivery: km\n')
+# Get delivery method
+print('Choose delivery method: \n1. Air\n2. Freight')
+user_choices['delivery_method'] = input('[ enter 1 / 2 ]:  ')
+# Insurance method
+print('Choose insurance: \n1. Full (R50)\n2. Limeted (R25)')
+user_choices['insurance'] = input('[ enter 1 / 2 ]:  ')
+# Gift
+print('Add gift: \n1. Yes (R15)\n2. No (R0)')
+user_choices['gift'] = input('[ enter 1 / 2 ]:  ')
+# Priority
+print('Priority: \n1. High (R100)\n2. Standard (R20)')
+user_choices['priority'] = input('[ enter 1 / 2 ]:  ')
+
+parcel_total = parcel_delivery_cost(user_choices)
+print('Parcel Total:  R %s'% parcel_total)

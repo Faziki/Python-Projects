@@ -1,0 +1,43 @@
+import time
+import math
+
+P = float(input("Enter the amount to be deposited: "))
+i = float(input("Enter the interest rate: "))
+r = i/100
+t = int(input("Enter the number of years for the investment: "))
+interestType = str(input("Enter if Simple or Compound interest:  "))
+
+
+# ================== How to Calculate Interest ==================
+# Simple interest rate is calculated as follows:
+#   A = P(1 + r * t)
+#   The Python equivalent is very similar:
+#       A =P*(1+r*t)
+
+# Compound interest rate is calculated as follows:
+#   A = P(1 + r) ^ t
+#   The Python equivalent is slightly different:
+#       A = P* math.pow((1+r),t)
+
+# ‘r’ is the interest entered divided by 100, e.g. if 8% is entered, then r is 0.08.
+# 'P' is the initial amount deposited
+# 't' is the number of years of the investment
+
+
+
+if interestType == "Simple":
+    print('Your Simple Interest is: ',(P*(1+r*t)))
+elif interestType == "Compound":
+    print('Your Compound Interest is: ',(P* math.pow((1+r),t)))
+else:
+    print("Oops! you haven't selected 'Simple' or 'Compound'")
+
+time.sleep(100)
+
+# Helper Code
+# P = float(input("Enter the amount to be deposited: "))
+# i = float(input("Enter the interest rate: "))
+# r = i/100
+# t = int(input("Enter the number of years for the investment: "))
+# interestType = input("Enter if Simple or Compound interest:  ")
+# A = 0.00
